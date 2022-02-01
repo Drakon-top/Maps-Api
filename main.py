@@ -16,8 +16,13 @@ class Example(QWidget):
         self.initUI()
 
     def getImage(self):
-        map_request = "http://static-maps.yandex.ru/1.x/?ll=37.530887,55.703118&spn=0.002,0.002&l=map"
-        response = requests.get(map_request)
+        map_request = "http://static-maps.yandex.ru/1.x/"
+        param = {
+            "ll": "37.530887,55.703118",
+            "spn": "0.002,0.002",
+            "l": "map",
+        }
+        response = requests.get(map_request, params=param)
 
         if not response:
             print("Ошибка выполнения запроса:")
@@ -33,7 +38,7 @@ class Example(QWidget):
     def initUI(self):
         self.setFixedSize(*SCREEN_SIZE)
         self.setGeometry(100, 100, *SCREEN_SIZE)
-        self.setWindowTitle('Отображение карты')
+        self.setWindowTitle('<MAPS.API>')
 
         ## Изображение
         self.pixmap = QPixmap(self.map_file)
